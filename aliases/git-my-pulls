@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+hub browse -- pulls/`git config --get user.username`
