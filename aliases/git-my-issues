@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+hub browse -- issues/assigned/`git config --get user.username`
