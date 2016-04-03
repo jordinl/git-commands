@@ -2,5 +2,5 @@
 
 set -e
 
-aliases_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-ln -sf $aliases_dir/aliases/* /usr/local/bin
+commands_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+ln -sf $commands_dir/commands/* /usr/local/bin
