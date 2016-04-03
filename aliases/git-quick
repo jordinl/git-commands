@@ -2,29 +2,36 @@
 
 set -e
 
-branches=($(echo `git branch --list *$1* | tr '* ' ' '`))
+include_remote=""
+track=""
+
+while getopts ":a" opt; do
+  case $opt in
+    a)
+      include_remote="-a"
+      track="-t"
+      shift
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+pattern=$1
+
+branches=($(echo `git branch $include_remote --list *$pattern* | tr '* ' ' '`))
+
 if [ ${#branches[@]} -eq 0 ]; then
-    branches=($(echo `git branch -a --list *$1* | tr '* ' ' '`))
-    if [ ${#branches[@]} -eq 0 ]; then
-        echo "No branches found"
-        exit 1
-    fi
-    if [ ${#branches[@]} -eq 1 ]; then
-        git checkout -t $branches
-        exit 0
-    else
-        PS3="Select an option: "
-        select option in "${branches[@]}"; do
-            git checkout -t $option
-            break
-        done
-    fi
+    echo "No branches found"
+    exit 1
 elif [ ${#branches[@]} -eq 1 ]; then
-    git checkout $branches
+    git checkout $track $branches
 else
     PS3="Select an option: "
     select option in "${branches[@]}"; do
-        git checkout $option
+        git checkout $track $option
         break
     done
 fi
