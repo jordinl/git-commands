@@ -1,5 +1,30 @@
 #!/usr/bin/env bash
-branches=$(echo `git branch --list *$1* | tr "* " " " | tr " " "\n"`)
-if [ ${#branches[@]} -eq 1 ]; then
+
+set -e
+
+branches=($(echo `git branch --list *$1* | tr '* ' ' '`))
+if [ ${#branches[@]} -eq 0 ]; then
+    branches=($(echo `git branch -a --list *$1* | tr '* ' ' '`))
+    if [ ${#branches[@]} -eq 0 ]; then
+        echo "No branches found"
+        exit 1
+    fi
+    if [ ${#branches[@]} -eq 1 ]; then
+        git checkout -t $branches
+        exit 0
+    else
+        PS3="Select an option: "
+        select option in "${branches[@]}"; do
+            git checkout -t $option
+            break
+        done
+    fi
+elif [ ${#branches[@]} -eq 1 ]; then
     git checkout $branches
+else
+    PS3="Select an option: "
+    select option in "${branches[@]}"; do
+        git checkout $option
+        break
+    done
 fi
