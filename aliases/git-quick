@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+branches=$(echo `git branch --list *$1* | tr "* " " " | tr " " "\n"`)
+if [ ${#branches[@]} -eq 1 ]; then
+    git checkout $branches
+fi
