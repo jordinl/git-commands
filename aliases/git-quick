@@ -24,8 +24,18 @@ pattern=$1
 branches=($(echo `git branch $include_remote --list *$pattern* | tr '* ' ' '`))
 
 if [ ${#branches[@]} -eq 0 ]; then
-    echo "No branches found"
-    exit 1
+    if [ -z $include_remote ]; then
+        echo "No local branches found"
+        read -p "Do you want to include remote branches? (y/n): " yn
+        case $yn in
+            [Yy]*) $0 -a $pattern;;
+            [Nn]*) exit 0;;
+            *) exit 1;;
+        esac
+    else
+        echo "No remote branches found"
+        exit 1
+    fi
 elif [ ${#branches[@]} -eq 1 ]; then
     git checkout $track $branches
 else
