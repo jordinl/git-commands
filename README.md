@@ -21,9 +21,8 @@ You need to set up your GitHub username globally `git config --global user.usern
 * git my-pulls: opens the user's GitHub pull requests page
 * git my-branches: opens the user's GitHub branches page
 * git my-issues: opens the user's GitHub issues page
+* git issue \<issue-number\>: Opens issue on GitHub
 
 ### Git commands
 
 * git quick \<pattern\>: checks out branch containing `<pattern>`, if multiple branches are found prompts user to choose which one. By default it checks local branches, the option `-a` allows to also search remote branches.
-
-
