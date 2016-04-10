@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+include_remote=""
+track=""
+
+while getopts ":a" opt; do
+  case $opt in
+    a)
+      all=true
+      shift
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ ! -z "$1" ]; then
+    echo $1
+    hub browse -- issues/$1
+    exit 0;
+fi
+
+if [ ! -z "$all" ]; then
+    hub browse -- issues
+    exit 0
+fi
+
+hub browse -- issues/assigned/`git config --get user.username`
