@@ -16,13 +16,13 @@ while getopts ":a" opt; do
   esac
 done
 
-if [ ! -z "$1" ]; then
+if [ -n "$1" ]; then
     echo $1
     hub browse -- issues/$1
     exit 0;
 fi
 
-if [ ! -z "$all" ]; then
+if [ -n "$all" ]; then
     hub browse -- issues
     exit 0
 fi
