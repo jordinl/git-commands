@@ -1,2 +1,23 @@
 #!/usr/bin/env bash
-hub browse -- branches/yours
+
+include_remote=""
+track=""
+
+while getopts ":a" opt; do
+  case $opt in
+    a)
+      all=true
+      shift
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ -n "$all" ]; then
+    hub browse -- branches
+else
+    hub browse -- branches/yours
+fi
