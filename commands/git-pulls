@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
-hub browse -- pulls/`git config --get user.username`
+
+if [ -n "$1" ]; then
+    hub browse -- pulls?q=$1
+else
+    hub browse -- pulls/`git config --get user.username`
+fi
