@@ -18,10 +18,9 @@ You need to set up your GitHub username globally `git config --global user.usern
 
 ### GitHub commands
 
-* git my-pulls: opens the user's GitHub pull requests page
-* git my-branches: opens the user's GitHub branches page
-* git my-issues: opens the user's GitHub issues page
-* git issue \<issue-number\>: Opens issue on GitHub
+* git pulls: opens the user's GitHub pull requests page. If a parameter is passed it searches PRs containing the term.
+* git branches: opens the user's GitHub branches page. Add `-a` to open all branches.
+* git issues: opens the user's GitHub issues page. Add `-a` to open all issues. The issue number can be passed as a parameter to open the issue.
 
 ### Git commands
 
